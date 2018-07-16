@@ -2,6 +2,7 @@ package com.example.ozturkse.sinebu.detail
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.ozturkse.sinebu.R
 
 class DetailActivity : AppCompatActivity() {
 

@@ -29,6 +29,7 @@ class Movie {
     @Expose
     var genreIds: List<Int>? = null
 
+
     fun getPosterUrl(): String {
         return "https://image.tmdb.org/t/p/w342$posterPath"
     }
