@@ -28,6 +28,8 @@ class HomeActivity : AppCompatActivity() {
         movies_list.layoutManager = LinearLayoutManager(this)
 
         getMovies()
+
+
     }
 
 
@@ -46,7 +48,9 @@ class HomeActivity : AppCompatActivity() {
         movies_list.adapter = MyMovieRecyclerViewAdapter(movies)
     }
 
-
+    interface OnMoviesClickCallback {
+        fun onClick(movie: Movie)
+    }
 
 
 }

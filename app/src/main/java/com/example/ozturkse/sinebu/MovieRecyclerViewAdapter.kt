@@ -8,12 +8,9 @@ import com.bumptech.glide.Glide
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-interface OnMoviesClickCallback {
-    fun onClick(movie: Movie)
-}
 
 
-class MyMovieRecyclerViewAdapter(val movies: List<Movie>?, val callback: OnMoviesClickCallback) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
+class MyMovieRecyclerViewAdapter(val movies: List<Movie>?) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)

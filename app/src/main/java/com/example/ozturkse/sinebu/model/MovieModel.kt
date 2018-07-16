@@ -21,6 +21,11 @@ class Movie {
     @Expose
     var releaseDate: String? = null
 
+    @SerializedName("backdrop_path")
+    @Expose
+    var backdropPath: String? = null
+
+
     @SerializedName("vote_average")
     @Expose
     var rating: Float = 0.toFloat()
@@ -29,9 +34,16 @@ class Movie {
     @Expose
     var genreIds: List<Int>? = null
 
+    private val BASE_POSTER_URL = "https://image.tmdb.org/t/p/w342"
+    val BASE_BACKDROP_URL = "httpS://image.tmdb.org/t/p/w780"
+
 
     fun getPosterUrl(): String {
-        return "https://image.tmdb.org/t/p/w342$posterPath"
+        return "$BASE_POSTER_URL$posterPath"
+    }
+
+    fun getBackdropUrl(): String {
+        return "$BASE_BACKDROP_URL$backdropPath"
     }
 }
 
