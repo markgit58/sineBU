@@ -7,7 +7,6 @@ import retrofit2.http.Query
 
 interface TheMovieDbApiService {
 
-
     @GET("discover/movie?sort_by=popularity.desc")
     fun getPopular(): Observable<TheMovieDbApiResponse>
 

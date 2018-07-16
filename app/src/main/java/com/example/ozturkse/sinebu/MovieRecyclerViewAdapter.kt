@@ -8,13 +8,12 @@ import com.bumptech.glide.Glide
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
-class MyMovieRecyclerViewAdapter(val movies: List<Movie>?) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
+interface OnMoviesClickCallback {
+    fun onClick(movie: Movie)
+}
 
+
+class MyMovieRecyclerViewAdapter(val movies: List<Movie>?, val callback: OnMoviesClickCallback) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
@@ -28,7 +27,7 @@ class MyMovieRecyclerViewAdapter(val movies: List<Movie>?) : RecyclerView.Adapte
 
     override fun getItemCount(): Int = movies!!.size
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(val movie_item_view : View) : RecyclerView.ViewHolder(movie_item_view) {
 
         fun bind(movie: Movie) = with(itemView) {
             item_movie_title.text = movie.title
