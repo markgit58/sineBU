@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     fun getMovies() {
-        disposable = apiService.getTopRated(apiKey = apikey)
+        disposable = apiService.getTopRated()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
