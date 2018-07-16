@@ -23,6 +23,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        // SET TOOLBAR
+        setSupportActionBar(toolbar)
+
         movies_list.layoutManager = LinearLayoutManager(this)
 
         getMovies()
@@ -43,6 +46,8 @@ class HomeActivity : AppCompatActivity() {
     fun displayMovies(movies: List<Movie>?) {
         movies_list.adapter = MyMovieRecyclerViewAdapter(movies)
     }
+
+
 
 
 }
