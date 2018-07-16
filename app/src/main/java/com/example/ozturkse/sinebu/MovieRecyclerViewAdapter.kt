@@ -15,17 +15,6 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 class MyMovieRecyclerViewAdapter(val movies: List<Movie>?) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
 
 
-    /*
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(item)
-        }
-    }
-    */
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return ViewHolder(view)
@@ -45,8 +34,5 @@ class MyMovieRecyclerViewAdapter(val movies: List<Movie>?) : RecyclerView.Adapte
             Glide.with(context).load(movie.getPosterUrl()).into(item_movie_poster)
         }
 
-        override fun toString(): String {
-            return super.toString() + " '"
-        }
     }
 }
