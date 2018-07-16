@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.example.ozturkse.sinebu.api.TheMovieDbApiService
+import com.example.ozturkse.sinebu.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -11,11 +13,8 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-    private val apikey = "65dd7f149cc5dc1f35fbedbc35c534ed"
-    private val baseUrl = "https://api.themoviedb.org/3/"
-
     private val apiService by lazy {
-        TheMovieDbApiService.create(baseUrl)
+        TheMovieDbApiService.create()
     }
 
     private var disposable: Disposable? = null
