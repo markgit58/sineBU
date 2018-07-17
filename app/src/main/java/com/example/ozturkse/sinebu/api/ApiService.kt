@@ -1,5 +1,6 @@
 package com.example.ozturkse.sinebu.api
 
+import com.example.ozturkse.sinebu.model.Movie
 import com.example.ozturkse.sinebu.network.NetworkModule
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -15,7 +16,10 @@ interface TheMovieDbApiService {
     fun getTopRated(): Observable<TheMovieDbApiResponse>
 
     @GET("movie/{movie_id}/reviews")
-    fun getReviews(@Path("movie_id") id: Int): Observable<TheMovieDbApiResponse>
+    fun getReviews(@Path("movie_id") id: Int): Observable<ReviewResponse>
+
+    @GET("movie/{movie_id}")
+    fun getMovie(@Path("movie_id") id: Int): Observable<Movie>
 
     @GET("movie/upcoming")
     fun getUpcomingMovies(): Observable<TheMovieDbApiResponse>

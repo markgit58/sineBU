@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.disposables.Disposable
 
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,6 +68,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    private fun movieItemClicked(movie: Movie) {
+        Toast.makeText(this, "Clicked: ${movie.title}", Toast.LENGTH_LONG).show()
+    }
+
     fun getMovies() {
         disposable = apiService.getUpcomingMovies()
                 .subscribeOn(Schedulers.io())
@@ -74,11 +81,24 @@ class MainActivity : AppCompatActivity() {
                         { result -> displayMovies(result.movies) },
                         { error -> Toast.makeText(this, error.message, Toast.LENGTH_LONG).show() }
                 )
-
     }
 
     fun displayMovies(movies: List<Movie>?) {
-        movies_list.adapter = MyMovieRecyclerViewAdapter(movies)
+        movies_list.adapter = MyMovieRecyclerViewAdapter(movies, { movie: Movie -> movieItemClicked(movie) })
+    }
+
+    fun getMovieDetails(movie: Movie) {
+        disposable = apiService.getMovie(movie.id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { result -> displayMovieDetails(result) },
+                        { error -> Toast.makeText(this, error.message, Toast.LENGTH_LONG).show() }
+                )
+    }
+
+    fun displayMovieDetails(movie: Movie) {
+
     }
 
 
