@@ -37,7 +37,6 @@ class Movie {
     private val BASE_POSTER_URL = "https://image.tmdb.org/t/p/w342"
     val BASE_BACKDROP_URL = "httpS://image.tmdb.org/t/p/w780"
 
-
     fun getPosterUrl(): String {
         return "$BASE_POSTER_URL$posterPath"
     }

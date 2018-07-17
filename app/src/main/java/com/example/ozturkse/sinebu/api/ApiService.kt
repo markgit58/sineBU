@@ -3,6 +3,7 @@ package com.example.ozturkse.sinebu.api
 import com.example.ozturkse.sinebu.network.NetworkModule
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TheMovieDbApiService {
@@ -12,6 +13,9 @@ interface TheMovieDbApiService {
 
     @GET("discover/movie?sort_by=vote_average.desc")
     fun getTopRated(): Observable<TheMovieDbApiResponse>
+
+    @GET("movie/{movie_id}/reviews")
+    fun getReviews(@Path("movie_id") id: Int): Observable<TheMovieDbApiResponse>
 
     @GET("movie/upcoming")
     fun getUpcomingMovies(): Observable<TheMovieDbApiResponse>
