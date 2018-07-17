@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
+import android.support.v7.app.ActionBar
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.Menu
@@ -22,7 +23,6 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.disposables.Disposable
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +38,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // set toolbar
         setSupportActionBar(toolbar)
+        // add drawer menu icon
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_menu_white_24dp)
+        }
+
         val layoutManager = GridLayoutManager(this, 2)
 
         movies_list.layoutManager = layoutManager
@@ -72,7 +80,6 @@ class MainActivity : AppCompatActivity() {
     fun displayMovies(movies: List<Movie>?) {
         movies_list.adapter = MyMovieRecyclerViewAdapter(movies)
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
