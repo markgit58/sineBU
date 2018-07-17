@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.ozturkse.sinebu.R
 import com.example.ozturkse.sinebu.api.TheMovieDbApiService
+import com.example.ozturkse.sinebu.detail.DetailActivity
 import com.example.ozturkse.sinebu.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -69,9 +70,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun movieItemClicked(movie: Movie) {
-        Toast.makeText(this, "Clicked: ${movie.title}", Toast.LENGTH_LONG).show()
-    }
 
     fun getMovies() {
         disposable = apiService.getUpcomingMovies()
@@ -87,6 +85,13 @@ class MainActivity : AppCompatActivity() {
         movies_list.adapter = MyMovieRecyclerViewAdapter(movies, { movie: Movie -> movieItemClicked(movie) })
     }
 
+    private fun movieItemClicked(movie: Movie) {
+        Toast.makeText(this, "Clicked: ${movie.title}", Toast.LENGTH_LONG).show()
+
+        getMovieDetails(movie)
+    }
+
+
     fun getMovieDetails(movie: Movie) {
         disposable = apiService.getMovie(movie.id)
                 .subscribeOn(Schedulers.io())
@@ -98,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displayMovieDetails(movie: Movie) {
-
+            startActivity(DetailActivity.newIntent(this, movie) )
     }
 
 
