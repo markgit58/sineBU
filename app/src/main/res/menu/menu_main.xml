@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ozturkse.sinebu.listing.MainActivity">
+
+    <item android:id="@+id/search"
+        android:hint="@string/search_title"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/baseline_search_white_24dp"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+</menu>
