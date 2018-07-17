@@ -6,12 +6,14 @@ import okhttp3.Response
 class ApiKeyInterceptor : Interceptor {
 
     private val apikey = "65dd7f149cc5dc1f35fbedbc35c534ed"
+    private val language = "tr-TR"
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val originalUrl = originalRequest.url()
         val url = originalUrl.newBuilder()
                 .addQueryParameter("api_key", apikey)
+                .addQueryParameter("language", language)
                 .build()
 
         val requestBuilder = originalRequest.newBuilder().url(url)
