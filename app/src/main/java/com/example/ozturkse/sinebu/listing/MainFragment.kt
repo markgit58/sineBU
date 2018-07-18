@@ -21,10 +21,12 @@ class MainFragment() : Fragment() {
         TheMovieDbApiService.create()
     }
 
-    private var data : List<Movie>? = emptyList()
-
-
     private var disposable: Disposable? = null
+
+
+    private var data: List<Movie>? = emptyList()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sectionNumber = arguments!!.getInt(ARG_SECTION_NUMBER)
@@ -33,19 +35,19 @@ class MainFragment() : Fragment() {
             1 -> getPopularMovies()
             2 -> getTopRatedMovies()
             3 -> getUpcomingMovies()
+
         }
 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_main, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLayout()
-
-
     }
 
     private fun initLayout() {
@@ -95,6 +97,17 @@ class MainFragment() : Fragment() {
                         { error -> Toast.makeText(context, error.message, Toast.LENGTH_LONG).show() }
                 )
     }
+
+    fun searchMovie(query:String) {
+        disposable = apiService.SearchMovies(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { result -> displayMovies(result.movies) },
+                        { error -> Toast.makeText(context, error.message, Toast.LENGTH_LONG).show() }
+                )
+    }
+
 
     fun displayMovies(movies: List<Movie>?) {
         data = movies

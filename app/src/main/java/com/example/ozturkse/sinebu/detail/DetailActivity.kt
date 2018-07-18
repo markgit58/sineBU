@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.ozturkse.sinebu.R
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.app_bar_home.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        setupToolbar();
+        setSupportActionBar(drawer_toolbar)
 
         val posterUrl = intent.getStringExtra(POSTER)
         Glide.with(this).load(posterUrl).into(movie_poster)
