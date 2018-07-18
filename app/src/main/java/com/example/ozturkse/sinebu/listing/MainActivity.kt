@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.GridLayoutManager
@@ -25,15 +26,13 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.disposables.Disposable
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val apiService by lazy {
-        TheMovieDbApiService.create()
-    }
 
-    private var disposable: Disposable? = null
+
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -50,9 +49,9 @@ class MainActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.baseline_menu_white_24dp)
         }
 
-        val layoutManager = GridLayoutManager(this, 2)
 
-        movies_list.layoutManager = layoutManager
+
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -61,50 +60,17 @@ class MainActivity : AppCompatActivity() {
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
-        getMovies()
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
 
 
+
     }
 
 
 
-    fun getMovies() {
-        disposable = apiService.getUpcomingMovies()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { result -> displayMovies(result.movies) },
-                        { error -> Toast.makeText(this, error.message, Toast.LENGTH_LONG).show() }
-                )
-    }
 
-    fun displayMovies(movies: List<Movie>?) {
-        movies_list.adapter = MyMovieRecyclerViewAdapter(movies, { movie: Movie -> movieItemClicked(movie) })
-    }
-
-    private fun movieItemClicked(movie: Movie) {
-        Toast.makeText(this, "Clicked: ${movie.title}", Toast.LENGTH_LONG).show()
-
-        getMovieDetails(movie)
-    }
-
-
-    fun getMovieDetails(movie: Movie) {
-        disposable = apiService.getMovie(movie.id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { result -> displayMovieDetails(result) },
-                        { error -> Toast.makeText(this, error.message, Toast.LENGTH_LONG).show() }
-                )
-    }
-
-    fun displayMovieDetails(movie: Movie) {
-            startActivity(DetailActivity.newIntent(this, movie) )
-    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -136,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
+            return MainFragment.newInstance(position)
         }
 
         override fun getCount(): Int {
@@ -153,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
             val rootView = inflater.inflate(R.layout.fragment_main, container, false)
+
             return rootView
         }
 

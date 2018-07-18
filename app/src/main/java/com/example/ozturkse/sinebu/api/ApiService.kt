@@ -24,8 +24,11 @@ interface TheMovieDbApiService {
     @GET("movie/upcoming")
     fun getUpcomingMovies(): Observable<TheMovieDbApiResponse>
 
+    @GET("movie/now_playing")
+    fun getNowPlayingMovies(): Observable<TheMovieDbApiResponse>
+
     @GET("search/movie")
-    fun getSearchMovies(@Query("query") query: String): Observable<TheMovieDbApiResponse>
+    fun SearchMovies(@Query("query") query: String): Observable<TheMovieDbApiResponse>
 
     companion object {
         fun create(): TheMovieDbApiService {

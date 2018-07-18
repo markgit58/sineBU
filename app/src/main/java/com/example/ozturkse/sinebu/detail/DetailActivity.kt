@@ -17,12 +17,16 @@ class DetailActivity : AppCompatActivity() {
 
         setupToolbar();
 
-        title = intent.getStringExtra(TITLE)
         val posterUrl = intent.getStringExtra(POSTER)
-
-
-        movie_name.text = title
         Glide.with(this).load(posterUrl).into(movie_poster)
+
+        val rating = intent.getStringExtra(RATING)
+
+
+        detail_movie_name.text = intent.getStringExtra(TITLE)
+        detail_movie_rating.text = rating
+        detail_movie_year.text = intent.getStringExtra(YEAR)
+        detail_rating_bar.rating = rating.toFloat()/2
 
     }
 
@@ -43,7 +47,8 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         private val TITLE = "title"
         private val POSTER = "poster"
-
+        private val YEAR = "year"
+        private val RATING = "rating"
         private val SUMMARY = "summary"
 
 
@@ -53,6 +58,9 @@ class DetailActivity : AppCompatActivity() {
             val posterUrl = movie.getPosterUrl()
             intent.putExtra(TITLE, movie.title)
             intent.putExtra(POSTER, posterUrl)
+            intent.putExtra(YEAR, movie.releaseDate!!.split("-")[0])
+            intent.putExtra(RATING, movie.rating.toString())
+
 
             return intent
         }
