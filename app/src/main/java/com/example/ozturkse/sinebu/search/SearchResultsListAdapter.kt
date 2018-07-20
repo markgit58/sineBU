@@ -12,7 +12,7 @@ import com.example.ozturkse.sinebu.R.id.*
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class SearchResultsListAdapter(private val context: Context, private var movies:List<Movie>?) : BaseAdapter() {
+class SearchResultsListAdapter(private val context: Context, private var movies:List<Movie>?, val clickListener :(Movie)-> Unit) : BaseAdapter() {
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -33,6 +33,8 @@ class SearchResultsListAdapter(private val context: Context, private var movies:
         val rowView = inflater.inflate(R.layout.item_movie, parent, false)
         val movie = getItem(position) as Movie
         Glide.with(context).load(movie.getPosterUrl()).into(rowView.item_movie_poster)
+        rowView.item_movie_poster.setOnClickListener { clickListener(movie)}
+
 
         return rowView
     }

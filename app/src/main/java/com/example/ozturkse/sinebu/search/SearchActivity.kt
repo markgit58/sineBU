@@ -10,6 +10,7 @@ import android.app.SearchManager
 import android.content.Intent
 import android.view.Menu
 import android.widget.ListView
+import com.example.ozturkse.sinebu.detail.DetailActivity
 import com.example.ozturkse.sinebu.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -48,8 +49,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         listView = activity_search_list_view
-        searchAdapter = SearchResultsListAdapter(this, movieslist)
+        searchAdapter = SearchResultsListAdapter(this, movieslist, { movie: Movie -> movieItemClicked(movie) })
         listView.adapter = searchAdapter
+
     }
 
 
@@ -78,6 +80,24 @@ class SearchActivity : AppCompatActivity() {
         movieslist = movies
         searchAdapter.updateList(movieslist)
 
+    }
+
+    private fun movieItemClicked(movie: Movie) {
+        getMovieDetails(movie)
+    }
+
+    fun getMovieDetails(movie: Movie) {
+        disposable = apiService.getMovie(movie.id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { result -> displayMovieDetails(result)},
+                        { error -> Toast.makeText(this, error.message, Toast.LENGTH_LONG).show() }
+                )
+    }
+
+    fun displayMovieDetails(movie: Movie) {
+        startActivity(DetailActivity.newIntent(this@SearchActivity, movie))
     }
 
 
