@@ -29,12 +29,16 @@ class SearchResultsListAdapter(private val context: Context, private var movies:
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        // Get view for row item
-        val rowView = inflater.inflate(R.layout.item_movie, parent, false)
+        // Get view for movie item
+        val rowView = inflater.inflate(R.layout.search_result, parent, false)
         val movie = getItem(position) as Movie
+        // set fields
+        rowView.item_movie_title.text = movie.title
+        rowView.item_movie_rating.text = movie.rating.toString()
+        rowView.item_movie_release_date.text = movie.releaseDate!!.split("-")[0]
         Glide.with(context).load(movie.getPosterUrl()).into(rowView.item_movie_poster)
+        // add click listener
         rowView.item_movie_poster.setOnClickListener { clickListener(movie)}
-
 
         return rowView
     }

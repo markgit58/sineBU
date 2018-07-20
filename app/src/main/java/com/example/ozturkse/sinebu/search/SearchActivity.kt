@@ -15,6 +15,7 @@ import com.example.ozturkse.sinebu.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search.*
+import android.support.v7.widget.SearchView
 
 class SearchActivity : AppCompatActivity() {
     private val apiService by lazy {
@@ -27,7 +28,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchAdapter: SearchResultsListAdapter
 
-    private var movieslist: List<Movie>?  = emptyList()
+    private var movieslist: List<Movie>? = emptyList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,8 +59,21 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.home, menu)
+        // Search
+        val searchView = menu.findItem(R.id.home_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchMovie(query)
+                return false
+            }
+        })
+
         return true
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -91,7 +105,7 @@ class SearchActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { result -> displayMovieDetails(result)},
+                        { result -> displayMovieDetails(result) },
                         { error -> Toast.makeText(this, error.message, Toast.LENGTH_LONG).show() }
                 )
     }
