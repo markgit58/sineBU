@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.ozturkse.sinebu.R
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.app_bar_home.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -28,9 +27,12 @@ class DetailActivity : AppCompatActivity() {
 
         val rating = intent.getStringExtra(RATING)
 
+        val overview = intent.getStringExtra(OVERVIEW)
+
 
         detail_movie_name.text = intent.getStringExtra(TITLE)
         detail_movie_rating.text = rating
+        detail_overview.text = overview
         detail_movie_year.text = intent.getStringExtra(YEAR)
         detail_rating_bar.rating = rating.toFloat()/2
 
@@ -47,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
         private val POSTER = "poster"
         private val YEAR = "year"
         private val RATING = "rating"
-        private val SUMMARY = "summary"
+        private val OVERVIEW = "overview"
 
 
         fun newIntent(context: Context, movie: Movie): Intent {
@@ -55,6 +57,8 @@ class DetailActivity : AppCompatActivity() {
 
             val posterUrl = movie.getPosterUrl()
             intent.putExtra(TITLE, movie.title)
+            intent.putExtra(OVERVIEW, movie.overview)
+
             intent.putExtra(POSTER, posterUrl)
             intent.putExtra(YEAR, movie.releaseDate!!.split("-")[0])
             intent.putExtra(RATING, movie.rating.toString())

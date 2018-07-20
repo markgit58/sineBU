@@ -9,6 +9,10 @@ class Movie {
     @Expose
     var id: Int = 0
 
+    @SerializedName("overview")
+    @Expose
+    val overview: String? = null
+
     @SerializedName("title")
     @Expose
     var title: String? = null
