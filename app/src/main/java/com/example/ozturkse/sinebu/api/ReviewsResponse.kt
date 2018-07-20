@@ -10,4 +10,5 @@ class ReviewResponse {
     @SerializedName("results")
     @Expose
     var reviews: List<Review>? = null
+
 }

@@ -14,6 +14,7 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import com.example.ozturkse.sinebu.R
+import com.example.ozturkse.sinebu.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -114,19 +115,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_licence -> {
+                startActivity(LicenceActivity.newIntent(this@HomeActivity))
             }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-
 
         }
 
