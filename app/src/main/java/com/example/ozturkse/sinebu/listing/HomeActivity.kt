@@ -3,10 +3,10 @@ package com.example.ozturkse.sinebu.listing
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.view.GravityCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -21,57 +21,62 @@ import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private var theCategoriesPagerAdapter: MoviesPagerAdapter? = null
+    private lateinit var viewPager: ViewPager
+    private lateinit var viewPagerAdapter: MoviesPagerAdapter
+    private lateinit var tabLayout: TabLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         // set toolbar
-        setSupportActionBar(drawer_toolbar)
-        setupToolbar()
+        app_bar_home_toolbar.title = getString(R.string.app_name)
+        setSupportActionBar(app_bar_home_toolbar)
 
-        // handle fab
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
-        // drawer toggle
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, drawer_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-
-
-
-        nav_view.setNavigationItemSelectedListener(this)
-
-        // Create the adapter that will return a fragment for each section of the activity.
-        theCategoriesPagerAdapter = MoviesPagerAdapter(supportFragmentManager)
-
-        // Set up the ViewPager with the sections adapter.
-        main_viewpager.adapter = theCategoriesPagerAdapter
-
-        main_viewpager.setCurrentItem(0)
-
-        main_viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(drawer_tabs))
-
-        drawer_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(main_viewpager))
-
-        main_viewpager.postDelayed(Runnable { main_viewpager.setCurrentItem(0) }, 100)
-    }
-
-
-
-
-    fun setupToolbar() {
-        // add drawer menu icon
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.baseline_menu_white_24dp)
         }
+
+
+        // drawer toggle
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, app_bar_home_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // nav drawer listener
+        activity_home_navigation_view.setNavigationItemSelectedListener(this)
+
+        viewPager = home_viewpager
+
+        // Create the adapter that will return a fragment for each section of the activity.
+        viewPagerAdapter = MoviesPagerAdapter(this, supportFragmentManager)
+
+        viewPagerAdapter.getItem(0)
+
+        // Set up the ViewPager with the sections adapter.
+        viewPager.adapter = viewPagerAdapter
+
+        tabLayout = app_bar_home_tablayout
+
+       // tabLayout.getTabAt(0)
+
+        // Give the TabLayout the ViewPager
+        tabLayout.setupWithViewPager(viewPager)
+
+
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+
+        tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
+
+
+
     }
+
+
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -81,7 +86,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun SearchMovie(query: String) {
+    fun searchMovie(query: String) {
         Toast.makeText(this, query, Toast.LENGTH_LONG).show()
 
     }
@@ -100,12 +105,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                SearchMovie(newText)
                 return false
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                SearchMovie(query)
+                searchMovie(query)
                 return false
             }
 
@@ -145,4 +149,5 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

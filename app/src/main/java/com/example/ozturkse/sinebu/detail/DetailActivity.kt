@@ -16,7 +16,12 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        setSupportActionBar(drawer_toolbar)
+        setSupportActionBar(activity_detail_toolbar)
+
+        if (supportActionBar != null) {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowTitleEnabled(true)
+        }
 
         val posterUrl = intent.getStringExtra(POSTER)
         Glide.with(this).load(posterUrl).into(movie_poster)
@@ -31,14 +36,6 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    private fun setupToolbar() {
-        setSupportActionBar(toolbar)
-
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.setDisplayShowTitleEnabled(false)
-        }
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

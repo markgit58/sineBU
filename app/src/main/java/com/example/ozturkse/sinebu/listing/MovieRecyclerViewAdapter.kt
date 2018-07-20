@@ -11,16 +11,22 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 
 
 
-class MyMovieRecyclerViewAdapter(val movies: List<Movie>?, val clickListener :(Movie)-> Unit) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
+class MovieRecyclerViewAdapter(var movies: List<Movie>?, val clickListener :(Movie)-> Unit) : RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_movie, viewGroup, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(movies!![position], clickListener)
 
+    }
+
+    fun updateList(newData:List<Movie>?){
+        movies = newData
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = movies!!.size
