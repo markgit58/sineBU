@@ -86,15 +86,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun searchMovie(query: String) {
-        Toast.makeText(this, query, Toast.LENGTH_LONG).show()
 
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.home, menu)
-
 
         // Search
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -102,18 +98,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.setIconifiedByDefault(false)
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                searchMovie(query)
-                return false
-            }
-
-        })
         return true
     }
 
