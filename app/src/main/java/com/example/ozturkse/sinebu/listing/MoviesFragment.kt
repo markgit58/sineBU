@@ -16,8 +16,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_movie_grid.view.*
+import android.support.v7.widget.LinearLayoutManager
+import android.os.Parcelable
+
+
 
 class MoviesFragment:Fragment(){
+
     private val apiService by lazy {
         TheMovieDbApiService.create()
     }
@@ -26,9 +31,18 @@ class MoviesFragment:Fragment(){
 
     private var data: List<Movie>? = emptyList()
 
+    private var clickListener = { movie: Movie -> movieItemClicked(movie) }
+
+
     private lateinit var recyclerView : RecyclerView
 
     private lateinit var adapter: MovieRecyclerViewAdapter
+
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+
+    private lateinit var recyclerViewState : Parcelable
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +53,34 @@ class MoviesFragment:Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val rootView = inflater?.inflate(R.layout.fragment_movie_grid, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_movie_grid, container, false)
 
-        recyclerView = rootView.movies_list
+        recyclerView = rootView.fragment_movie_grid_recycler_view
 
-        recyclerView.layoutManager = GridLayoutManager(activity, 2)
+        layoutManager = GridLayoutManager(activity, 2)
 
-        adapter = MovieRecyclerViewAdapter(data, { movie: Movie -> movieItemClicked(movie) })
+        recyclerView.layoutManager = layoutManager
+
+        adapter = MovieRecyclerViewAdapter(data, clickListener)
 
         recyclerView.adapter = adapter
 
         return rootView
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Save currently selected layout manager.
+        outState.putParcelable(KEY_SCROLL_STATE, recyclerView.layoutManager!!.onSaveInstanceState() )
+    }
+
+    override fun onViewStateRestored(outState: Bundle?) {
+        if (outState != null) {
+            val savedRecyclerLayoutState = outState.getParcelable<Parcelable>(KEY_SCROLL_STATE)
+            recyclerView.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
+        }
+        super.onViewStateRestored(outState)
 
     }
 
@@ -129,7 +160,10 @@ class MoviesFragment:Fragment(){
     }
 
     companion object {
+        // keys
         private val TAG = "RecyclerViewFragment"
+
+        private val KEY_SCROLL_STATE = "scroll_state"
 
         private val KEY_SECTION_NUMBER = "section_number"
 

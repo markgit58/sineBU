@@ -38,9 +38,14 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".listing.LicenceActivity" />
+
         <activity
             android:name=".settings.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".listing.HomeActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        </activity>
     </application>
 
 </manifest>

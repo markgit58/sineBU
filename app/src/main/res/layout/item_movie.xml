@@ -10,7 +10,7 @@
         android:layout_height="320dp"
         android:layout_gravity="center"
         android:layout_margin="1dp"
-        android:clickable="true">
+        >
 
         <ImageView
             android:id="@+id/item_movie_poster"
@@ -24,7 +24,7 @@
         <View
             android:id="@+id/title_background"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="@dimen/title_background_height"
             android:layout_gravity="bottom"
             android:alpha="0.5"
             android:background="@color/colorPrimaryDark"
@@ -39,12 +39,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
             android:gravity="center"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:text="the godfather"
             android:textColor="@android:color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/item_movie_release_date"
@@ -55,10 +54,10 @@
             android:id="@+id/item_movie_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/margin_default"
             android:alpha="0.7"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="2018"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/title_background"
             tools:layout_editor_absoluteX="8dp" />
@@ -68,12 +67,21 @@
             android:id="@+id/item_movie_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="3.5"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/title_background"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title_background"
+            app:layout_constraintEnd_toStartOf="@+id/item_movie_rating"
+            app:srcCompat="@drawable/star" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

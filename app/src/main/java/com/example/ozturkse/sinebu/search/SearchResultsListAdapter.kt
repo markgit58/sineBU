@@ -11,8 +11,10 @@ import com.example.ozturkse.sinebu.R
 import com.example.ozturkse.sinebu.R.id.*
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
+import kotlinx.android.synthetic.main.search_result.view.*
 
-class SearchResultsListAdapter(private val context: Context, private var movies:List<Movie>?, val clickListener :(Movie)-> Unit) : BaseAdapter() {
+class SearchResultsListAdapter(private val context: Context, private var movies:List<Movie>?, private val clickListener :(Movie)-> Unit) : BaseAdapter() {
+
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -33,12 +35,12 @@ class SearchResultsListAdapter(private val context: Context, private var movies:
         val rowView = inflater.inflate(R.layout.search_result, parent, false)
         val movie = getItem(position) as Movie
         // set fields
-        rowView.item_movie_title.text = movie.title
-        rowView.item_movie_rating.text = movie.rating.toString()
-        rowView.item_movie_release_date.text = movie.releaseDate!!.split("-")[0]
-        Glide.with(context).load(movie.getPosterUrl()).into(rowView.item_movie_poster)
+        rowView.search_result_movie_title.text = movie.title
+        rowView.search_result_movie_rating.text = movie.rating.toString()
+        rowView.search_result_movie_release_date.text = movie.releaseDate!!.split("-")[0]
+        Glide.with(context).load(movie.getPosterUrl()).into(rowView.search_result_movie_poster)
         // add click listener
-        rowView.item_movie_poster.setOnClickListener { clickListener(movie)}
+        rowView.cardview_movie.setOnClickListener { clickListener(movie)}
 
         return rowView
     }

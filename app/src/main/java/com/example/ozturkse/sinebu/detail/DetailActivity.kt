@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.ozturkse.sinebu.R
 import com.example.ozturkse.sinebu.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -15,12 +16,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        setSupportActionBar(activity_detail_toolbar)
-
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.setDisplayShowTitleEnabled(true)
-        }
+        setToolbar()
 
         val posterUrl = intent.getStringExtra(POSTER)
         Glide.with(this).load(posterUrl).into(movie_poster)
@@ -34,7 +30,6 @@ class DetailActivity : AppCompatActivity() {
         detail_movie_rating.text = rating
         detail_overview.text = overview
         detail_movie_year.text = intent.getStringExtra(YEAR)
-        detail_rating_bar.rating = rating.toFloat()/2
 
     }
 
@@ -42,6 +37,15 @@ class DetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    private fun setToolbar(){
+        setSupportActionBar(toolbar)
+
+        if (supportActionBar != null) {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowTitleEnabled(true)
+        }
     }
 
     companion object {

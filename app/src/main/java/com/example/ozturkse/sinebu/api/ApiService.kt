@@ -15,9 +15,6 @@ interface TheMovieDbApiService {
     @GET("discover/movie?sort_by=vote_average.desc")
     fun getTopRated(): Observable<TheMovieDbApiResponse>
 
-    @GET("movie/{movie_id}/reviews")
-    fun getReviews(@Path("movie_id") id: Int): Observable<ReviewResponse>
-
     @GET("movie/{movie_id}")
     fun getMovie(@Path("movie_id") id: Int): Observable<Movie>
 

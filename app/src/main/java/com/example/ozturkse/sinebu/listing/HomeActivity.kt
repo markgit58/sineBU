@@ -15,6 +15,7 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import com.example.ozturkse.sinebu.R
+import com.example.ozturkse.sinebu.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -115,6 +116,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_licence -> {
                 startActivity(LicenceActivity.newIntent(this@HomeActivity))
+            }
+            R.id.nav_settings -> {
+                startActivity(SettingsActivity.newIntent(this@HomeActivity))
             }
 
         }

@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".listing.LicenceActivity">
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/activity_detail_toolbar"
+        android:id="@+id/toolbar_licence"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -14,23 +15,23 @@
 
     <TextView
         android:id="@+id/disclaimer"
-        android:layout_width="276dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_default"
+        android:padding="@dimen/appbar_padding_top"
         android:text="@string/disclaimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tmdb_logo" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/tmdb_logo"
         android:layout_width="172dp"
         android:layout_height="55dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_detail_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_licence"
         app:srcCompat="@drawable/tmdb_logo" />
 
 
