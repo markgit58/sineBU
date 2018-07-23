@@ -51,12 +51,14 @@
             android:id="@+id/scrolling_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorCard"
             android:layout_weight="1"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:backgroundTint="@color/colorCard"
                 android:orientation="vertical">
 
                 <TextView

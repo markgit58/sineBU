@@ -1,4 +1,4 @@
-package com.example.ozturkse.sinebu.listing
+package com.example.ozturkse.sinebu.licence
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ozturkse.sinebu.R
 import kotlinx.android.synthetic.main.activity_licence.*
-import kotlinx.android.synthetic.main.toolbar.*
 
 
 class LicenceActivity : AppCompatActivity() {

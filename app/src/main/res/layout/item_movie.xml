@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    app:cardCornerRadius="@dimen/margin_default"
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:layout_gravity="center"
-        android:layout_margin="1dp"
+        android:layout_margin="@dimen/margin_minimum"
         >
 
         <ImageView

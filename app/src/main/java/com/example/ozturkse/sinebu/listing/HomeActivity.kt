@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBar
@@ -15,6 +14,7 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import com.example.ozturkse.sinebu.R
+import com.example.ozturkse.sinebu.licence.LicenceActivity
 import com.example.ozturkse.sinebu.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.content_home.*
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var viewPager: ViewPager
-    private lateinit var viewPagerAdapter: MoviesPagerAdapter
+    private lateinit var viewPagerAdapter: MoviesFragmentPagerAdapter
     private lateinit var tabLayout: TabLayout
 
 
@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewPager = home_viewpager
 
         // Create the adapter that will return a fragment for each section of the activity.
-        viewPagerAdapter = MoviesPagerAdapter(this, supportFragmentManager)
+        viewPagerAdapter = MoviesFragmentPagerAdapter(this, supportFragmentManager)
 
         viewPagerAdapter.getItem(0)
 

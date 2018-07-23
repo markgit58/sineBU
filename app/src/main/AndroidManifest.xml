@@ -37,7 +37,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".listing.LicenceActivity" />
+        <activity android:name=".licence.LicenceActivity" />
 
         <activity
             android:name=".settings.SettingsActivity"

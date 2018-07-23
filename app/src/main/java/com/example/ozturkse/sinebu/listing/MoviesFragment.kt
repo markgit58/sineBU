@@ -16,7 +16,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_movie_grid.view.*
-import android.support.v7.widget.LinearLayoutManager
 import android.os.Parcelable
 
 
@@ -69,18 +68,20 @@ class MoviesFragment:Fragment(){
 
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
         // Save currently selected layout manager.
-        outState.putParcelable(KEY_SCROLL_STATE, recyclerView.layoutManager!!.onSaveInstanceState() )
+        savedInstanceState.putParcelable(KEY_SCROLL_STATE, recyclerView.layoutManager!!.onSaveInstanceState() )
     }
 
-    override fun onViewStateRestored(outState: Bundle?) {
-        if (outState != null) {
-            val savedRecyclerLayoutState = outState.getParcelable<Parcelable>(KEY_SCROLL_STATE)
-            recyclerView.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            recyclerViewState = savedInstanceState.getParcelable<Parcelable>(KEY_SCROLL_STATE)
+            recyclerView.layoutManager!!.onRestoreInstanceState(recyclerViewState)
+
         }
-        super.onViewStateRestored(outState)
+        super.onViewStateRestored(savedInstanceState)
 
     }
 
