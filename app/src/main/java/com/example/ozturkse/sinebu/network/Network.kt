@@ -1,6 +1,6 @@
 package com.example.ozturkse.sinebu.network
 
-import com.example.ozturkse.sinebu.api.ApiKeyInterceptor
+import com.example.ozturkse.sinebu.api.ApiParameterInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkModule(baseUrl: String) {
     val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(ApiKeyInterceptor())
+            .addInterceptor(ApiParameterInterceptor())
             .build()
 
     val retrofit = Retrofit.Builder()

@@ -55,8 +55,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Create the adapter that will return a fragment for each section of the activity.
         viewPagerAdapter = MoviesFragmentPagerAdapter(this, supportFragmentManager)
 
-        viewPagerAdapter.getItem(0)
-
         // Set up the ViewPager with the sections adapter.
         viewPager.adapter = viewPagerAdapter
 

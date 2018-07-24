@@ -4,7 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*
 
-class ApiKeyInterceptor : Interceptor {
+class ApiParameterInterceptor : Interceptor {
 
     private val api_key = "65dd7f149cc5dc1f35fbedbc35c534ed"
     private val language = Locale.getDefault().language.toString()

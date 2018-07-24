@@ -8,7 +8,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="@dimen/movie_card_height"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_minimum"
         >
