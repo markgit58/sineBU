@@ -6,18 +6,18 @@ import java.util.*
 
 class ApiParameterInterceptor : Interceptor {
 
-    private val api_key = "65dd7f149cc5dc1f35fbedbc35c534ed"
-    private val language = Locale.getDefault().language.toString()
-    private val country = Locale.getDefault().country.toString()
-    private val api_language = language + '-' + country
+    private val apiKey = "65dd7f149cc5dc1f35fbedbc35c534ed"
+    private val language get() = { Locale.getDefault().language.toString() }
+    private val country get() = { Locale.getDefault().country.toString() }
+    private val apiLanguage get() = { language() + '-' + country() }
 
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val originalUrl = originalRequest.url()
         val url = originalUrl.newBuilder()
-                .addQueryParameter("api_key", api_key)
-                .addQueryParameter("language", api_language)
+                .addQueryParameter("api_key", apiKey)
+                .addQueryParameter("language", apiLanguage())
                 .build()
 
         val requestBuilder = originalRequest.newBuilder().url(url)
